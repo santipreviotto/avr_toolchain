@@ -11,11 +11,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # \file Dockerfile 
-FROM debian:bullseye-slim
+FROM debian:buster-slim
 RUN apt-get update && apt upgrade -y \
     && apt-get install make -y \
     && apt-get install gcc-avr avr-libc avrdude -y \
-    && apt-get install python python-pip -y \
-    && pip install cpplint \
+    && apt-get install python python3-pip -y \
+    && pip3 install cpplint \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
