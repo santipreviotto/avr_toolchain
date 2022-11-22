@@ -1,0 +1,20 @@
+#!/bin/bash
+# \file docker 
+docker run --rm -dit \
+    --privileged \
+    --name avr_toolchain \
+    -v /dev/bus/usb:/dev/bus/usb \
+    -w $(pwd) \
+    -u $(id -u):$(id -g) \
+    -v /etc/passwd:/etc/passwd:ro \
+    -v /etc/group:/etc/group:ro \
+    --group-add=sudo \
+    --group-add=tty \
+    --group-add=dialout \
+    -v $(pwd):$(pwd) \
+    santipreviotto/avr_toolchain:lastest \
+    /bin/bash
+
+docker exec -it avr_toolchain bash
+
+docker stop avr_toolchain
