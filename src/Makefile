@@ -1,16 +1,31 @@
-MAINFILE = main
-LIBFILE = blink
-PORT = /dev/ttyUSB0
+# Copyright (C) 2022  Santiago Previotto
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# \file Makefile
+MAIN_FILE = main
+LIB_FILE = blink
+
 DEVICE = atmega328p
 FRECUENCY = 16000000UL
+
 PROGRAMMER = arduino
-BAUD = 57600
+PROGRAMMER_BAUD = 57600
+PROGRAMMER_PORT = /dev/ttyUSB0
+
 COMPILER = avr-gcc
 UPLOADER = avrdude
 
 LINT_TOOL = cpplint
 LINT_FLAGS = --recursive --quiet
-
 
 dockeride:
 ifndef YOUARECONTAINERIZEDBUDDY
