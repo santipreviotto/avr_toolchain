@@ -11,19 +11,24 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # \file Makefile
+# files macros #
 MAIN_FILE = main
 LIB_FILE = blink
 
-DEVICE = atmega328p
-FRECUENCY = 16000000UL
+# microcontroller macros #
+CPU_ID = atmega328p
+CPU_FREQ = 16000000UL
 
-PROGRAMMER = arduino
-PROGRAMMER_BAUD = 57600
-PROGRAMMER_PORT = /dev/ttyUSB0
+# programmer macros #
+PROG_ID = arduino
+PROG_BAUD = 57600
+PROG_PORT = /dev/ttyUSB0
 
+# compiler and uploader macros #
 COMPILER = avr-gcc
 UPLOADER = avrdude
 
+# cpplint macros #
 LINT_TOOL = cpplint
 LINT_FLAGS = --recursive --quiet
 
@@ -33,27 +38,23 @@ ifndef YOUARECONTAINERIZEDBUDDY
 else
 	echo "Alredy dockerized, pal!"
 endif
-
 	$(info )
 	$(info Welcome to the docker image for programming AVR microcontrollers.)
 	$(info )
-	$(info Copyright 2022 Previotto Santiago.)
-	$(info )
 
 build:
-	$(COMPILER) -Wall -Os -DF_CPU=$(FRECUENCY) -mmcu=$(DEVICE) -c $(MAINFILE).c -o $(MAINFILE).o
-	cd lib/src/ && $(COMPILER) -Wall -Os -DF_CPU=$(FRECUENCY) -mmcu=$(DEVICE) -c $(LIBFILE).c -o $(LIBFILE).o
-	cd lib/src/ && mv $(LIBFILE).o ../../
-	$(COMPILER) -Wall -Os -DF_CPU=$(FRECUENCY) -mmcu=$(DEVICE) -o $(MAINFILE).elf $(MAINFILE).o $(LIBFILE).o
-	avr-objcopy -j .text -j .data -O ihex $(MAINFILE).elf $(MAINFILE).hex
-	avr-size --format=avr --mcu=$(DEVICE) $(MAINFILE).elf
+	$(COMPILER) -Wall -Os -DF_CPU=$(CPU_FREQ) -mmcu=$(CPU_ID) -c $(MAIN_FILE).c -o $(MAIN_FILE).o
+	cd lib/src/ && $(COMPILER) -Wall -Os -DF_CPU=$(CPU_FREQ) -mmcu=$(CPU_ID) -c $(LIB_FILE).c -o $(LIB_FILE).o
+	cd lib/src/ && mv $(LIB_FILE).o ../../
+	$(COMPILER) -Wall -Os -DF_CPU=$(CPU_FREQ) -mmcu=$(CPU_ID) -o $(MAIN_FILE).elf $(MAIN_FILE).o $(LIB_FILE).o
+	avr-objcopy -j .text -j .data -O ihex $(MAIN_FILE).elf $(MAIN_FILE).hex
+	avr-size --format=avr --mcu=$(CPU_ID) $(MAIN_FILE).elf
 
 flash:
-	$(UPLOADER) -v -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) -b $(BAUD) -U flash:w:$(MAINFILE).hex:i -D
+	$(UPLOADER) -v -p $(CPU_ID) -c $(PROG_ID) -P $(PORT) -b $(BAUD) -U flash:w:$(MAIN_FILE).hex:i -D
 
 lint: 
 	$(LINT_TOOL) $(LINT_FLAGS) *
 
 clean: 
-	rm $(MAINFILE).hex $(MAINFILE).elf $(MAINFILE).o $(LIBFILE).o
-
+	rm $(MAIN_FILE).hex $(MAIN_FILE).elf $(MAIN_FILE).o $(LIB_FILE).o
