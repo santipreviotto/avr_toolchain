@@ -32,7 +32,7 @@ UPLOADER = avrdude
 LINT_TOOL = cpplint
 LINT_FLAGS = --recursive --quiet
 
-dockeride:
+docker:
 ifndef YOUARECONTAINERIZEDBUDDY
 	../tools/dockeride -p $(PWD)/..
 else
@@ -51,7 +51,7 @@ build:
 	avr-size --format=avr --mcu=$(CPU_ID) $(MAIN_FILE).elf
 
 flash:
-	$(UPLOADER) -v -p $(CPU_ID) -c $(PROG_ID) -P $(PORT) -b $(BAUD) -U flash:w:$(MAIN_FILE).hex:i -D
+	$(UPLOADER) -v -p $(CPU_ID) -c $(PROG_ID) -P $(PROG_PORT) -b $(PROG_BAUD) -U flash:w:$(MAIN_FILE).hex:i -D
 
 lint: 
 	$(LINT_TOOL) $(LINT_FLAGS) *
