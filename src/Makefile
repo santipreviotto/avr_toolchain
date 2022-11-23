@@ -34,9 +34,9 @@ LINT_FLAGS = --recursive --quiet
 
 docker:
 ifndef YOUARECONTAINERIZEDBUDDY
-	../tools/dockeride -p $(PWD)/..
+	../tools/docker -p $(PWD)/..
 else
-	echo "Alredy dockerized, pal!"
+	echo "The docker image is now available on the system!"
 endif
 	$(info )
 	$(info Welcome to the docker image for programming AVR microcontrollers.)
