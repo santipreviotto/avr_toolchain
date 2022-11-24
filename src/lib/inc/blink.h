@@ -14,7 +14,8 @@
 #ifndef SRC_LIB_INC_BLINK_H_
 #define SRC_LIB_INC_BLINK_H_
 
-#define BLINKING_LED    PORTB5  /**< \brief Blinking led associated pin. */
+#define IO_REG_BLINKING_LED     DDB5    /**< \brief Blinking led associated bit of gpio register. */
+#define BLINKING_LED            PORTB5  /**< \brief Blinking led associated pin. */
 
 void vBlink();
 
