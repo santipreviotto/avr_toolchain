@@ -14,6 +14,8 @@
 #ifndef SRC_LIB_INC_BLINK_H_
 #define SRC_LIB_INC_BLINK_H_
 
+#define BLINKING_LED    PORTB5  /**< \brief Blinking led associated pin. */
+
 void vBlink();
 
 #endif  /* SRC_LIB_INC_BLINK_H_ */
