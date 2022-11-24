@@ -19,14 +19,14 @@
 #include "../inc/blink.h"
 
 /* macro definition */
-#define T       100
+#define TIME_MS     100 /**< \brief Time for blink in milliseconds. */
 
 /**
  * \brief It's a blink function.
  */
 void vBlink() {
-    PORTB |= (1 << PORTB5);
-    _delay_ms(T);
-    PORTB &=~(1 << PORTB5);
-    _delay_ms(T);
+    PORTB |= (1 << BLINKING_LED);
+    _delay_ms(TIME_MS);
+    PORTB &=~(1 << BLINKING_LED);
+    _delay_ms(TIME_MS);
 }
