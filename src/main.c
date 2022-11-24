@@ -21,7 +21,7 @@
  *  \brief Program entrypoint.
  */
 int main() {
-    DDRB |= (1 << DDB5);
+    DDRB |= (1 << IO_REG_BLINKING_LED);
     while (1) {
         vBlink();
     }
