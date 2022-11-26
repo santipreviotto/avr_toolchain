@@ -22,7 +22,7 @@
 #define TIME_MS     100 /**< \brief Time for blink in milliseconds. */
 
 /**
- * \brief It's a blink function.
+ *  \brief It's a blink function.
  */
 void vBlink() {
     PORTB |= (1 << BLINKING_LED);

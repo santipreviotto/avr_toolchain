@@ -18,7 +18,7 @@
 #include "lib/inc/blink.h"
 
 /**
- *  \brief Program entrypoint.
+ *	\brief Program entrypoint.
  */
 int main() {
     DDRB |= (1 << IO_REG_BLINKING_LED);
